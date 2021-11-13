@@ -6,12 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { GroceriesComponent } from './groceries/groceries.component';
-import { GroceryListComponent } from './groceries/grocery-list/grocery-list.component';
-import { GroceryDetailComponent } from './groceries/grocery-detail/grocery-detail.component';
-import { GroceryItemComponent } from './groceries/grocery-list/grocery-item/grocery-item.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { RoutingModule } from './routing/routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -29,18 +23,10 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    GroceriesComponent,
-    GroceryListComponent,
-    GroceryDetailComponent,
-    GroceryItemComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
-  ],
+  declarations: [AppComponent, HeaderComponent],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatToolbarModule,
