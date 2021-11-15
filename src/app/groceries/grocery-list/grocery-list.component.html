@@ -1,21 +1,36 @@
-<mat-grid-list cols="3" rowHeight="1:1.4">
-  <mat-grid-tile *ngFor="let item of groceryList">
-    <mat-card class="example-card">
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{ item.title }}</mat-card-title>
-        <mat-card-subtitle>{{ item.id }}</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-image src="{{ item.image }}" alt="Photo of a Shiba Inu" />
-      <mat-card-content>
-        <p>
-          {{ item.description }}
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
-    </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+<div class="content">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div
+      fxFlex="33%"
+      fxFlex.xs="100%"
+      fxFlex.sm="50%"
+      *ngFor="let item of groceryList"
+    >
+      <mat-card class="mat-elevation-z4">
+        <div mat-card-avatar class="example-header-image">
+          Ref: {{ item.id }}
+        </div>
+        <mat-card-title-group>
+          <mat-card-title>{{ item.title | slice: 0:30 }}</mat-card-title>
+          <mat-card-subtitle>{{ item.category | uppercase }}</mat-card-subtitle>
+          <img
+            mat-card-lg-image
+            src="{{ item.image }}"
+            alt="{{ item.title }}"
+          />
+        </mat-card-title-group>
+        <mat-card-content>
+          {{ item.description | slice: 0:45 }}
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary">
+            <a (click)="productDetail(item.id)"
+              >{{ item.title | slice: 0:20 }} Detail
+            </a>
+          </button>
+          <button mat-raised-button color="accent">Add to Cart</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

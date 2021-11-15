@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { GroceriesComponent } from './groceries/groceries.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/groceries', pathMatch: 'full' },
@@ -18,6 +19,7 @@ const routes: Routes = [
         (m) => m.ShoppingListModule
       ),
   },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

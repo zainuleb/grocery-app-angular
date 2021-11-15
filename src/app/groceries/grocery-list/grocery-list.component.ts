@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Grocery } from '../grocery.interface';
-import { GroceryListService } from '../grocery-list.service';
 import { Subject, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
+
+import { Grocery } from '../grocery.interface';
+import { GroceryService } from 'src/app/services/grocery.service';
+
 @Component({
   selector: 'app-grocery-list',
   templateUrl: './grocery-list.component.html',
@@ -12,7 +15,7 @@ export class GroceryListComponent implements OnInit {
 
   private readonly unsubscribe$: Subject<void> = new Subject();
 
-  constructor(private groceries: GroceryListService) {
+  constructor(private groceries: GroceryService, private router: Router) {
     this.groceries
       .getProducts()
       .pipe(takeUntil(this.unsubscribe$))
@@ -23,6 +26,9 @@ export class GroceryListComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+  productDetail(id: number): void {
+    this.router.navigate([`groceries/${id}`]);
+  }
 
   ngOnDestroy() {
     this.unsubscribe$.next();
