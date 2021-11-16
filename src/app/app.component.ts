@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'grocery-app';
@@ -17,7 +17,6 @@ export class AppComponent {
   ngOnInit() {
     this.mediaSub = this.mediaObserver.media$.subscribe(
       (result: MediaChange) => {
-        console.log(result.mqAlias);
         this.deviceXs = result.mqAlias === 'xs' ? true : false;
       }
     );

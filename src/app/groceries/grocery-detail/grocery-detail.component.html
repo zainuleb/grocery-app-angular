@@ -3,17 +3,17 @@
     <img
       data-image="red"
       class="active"
-      src="{{ gorceryItem.image }}"
-      alt="{{ gorceryItem.title }}"
+      src="{{ gorceryItem?.image }}"
+      alt="{{ gorceryItem?.title }}"
     />
   </div>
 
   <div class="right-column">
     <div class="product-description">
-      <span>{{ gorceryItem.category }}</span>
-      <h1>{{ gorceryItem.title }}</h1>
+      <span>{{ gorceryItem?.category }}</span>
+      <h1>{{ gorceryItem?.title }}</h1>
       <p>
-        {{ gorceryItem.description | lowercase }}
+        {{ gorceryItem?.description | lowercase }}
       </p>
     </div>
 
@@ -59,7 +59,7 @@
 
     <!-- Product Pricing -->
     <div class="product-price">
-      <span>{{ gorceryItem.price }}$</span>
+      <span>{{ gorceryItem?.price }}$</span>
       <a href="#" class="cart-btn">Add to cart</a>
     </div>
   </div>

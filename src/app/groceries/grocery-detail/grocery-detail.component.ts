@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { GroceryService } from 'src/app/services/grocery.service';
-import { Grocery } from '../grocery.interface';
+import { GroceryService } from 'src/app/api/groceries/services/grocery.service';
+import { Grocery } from '../../api/groceries/interfaces/grocery.interface';
 
 @Component({
   selector: 'app-grocery-detail',
   templateUrl: './grocery-detail.component.html',
-  styleUrls: ['./grocery-detail.component.css'],
+  styleUrls: ['./grocery-detail.component.scss'],
 })
 export class GroceryDetailComponent implements OnInit {
   gorceryItem: Grocery;
@@ -32,11 +32,8 @@ export class GroceryDetailComponent implements OnInit {
         .getProduct(this.id)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((data) => {
-          console.log(data);
           this.gorceryItem = data;
         });
-
-      console.log(this.gorceryItem);
     });
   }
 
