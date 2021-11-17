@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomePageModule } from './home-page/home-page.module';
 import { GroceriesComponent } from './groceries/groceries.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AppComponent } from './app.component';
 
@@ -20,10 +20,10 @@ const routes: Routes = [
       import('./groceries/groceries.module').then((m) => m.GroceriesModule),
   },
   {
-    path: 'shopping-list',
+    path: 'checkout',
     loadChildren: () =>
-      import('./shopping-list/shopping-list.module').then(
-        (m) => m.ShoppingListModule
+      import('./checkout-page/checkout-page-routing.module').then(
+        (m) => m.CheckoutPageRoutingModule
       ),
   },
   { path: '**', component: PageNotFoundComponent },

@@ -14,7 +14,7 @@
       <div fxShow="true" fxHide.lt-md>
         <!-- The following menu items will be hidden on both SM and XS screen sizes -->
         <a routerLink="groceries" mat-button>Groceries Catalog</a>
-        <a routerLink="shopping-list" mat-button>Shopping List</a>
+        <a routerLink="checkout" mat-button>Shopping List</a>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
@@ -24,11 +24,12 @@
       <mat-nav-list>
         <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
         <a routerLink="groceries" mat-button>Groceries Catalog</a>
-        <a routerLink="shopping-list" mat-button>Shopping List</a>
+        <a routerLink="checkout" mat-button>Shopping List</a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content fxFlexFill>
       <router-outlet></router-outlet>
+      <app-footer></app-footer>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

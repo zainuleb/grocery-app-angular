@@ -22,7 +22,7 @@
         <mat-card-content>
           {{ item.description | slice: 0:45 }}
         </mat-card-content>
-        <mat-card-actions>
+        <mat-card-actions class="buttonsContainer">
           <button mat-raised-button color="primary">
             <a (click)="productDetail(item.id)"> Detail </a>
           </button>
