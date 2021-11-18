@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HomePageModule } from './home-page/home-page.module';
+import { GroceriesModule } from './groceries/groceries.module';
+import { CheckoutPageModule } from './checkout-page/checkout-page.module';
 import { GroceriesComponent } from './groceries/groceries.component';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -24,6 +26,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./checkout-page/checkout-page-routing.module').then(
         (m) => m.CheckoutPageRoutingModule
+      ),
+  },
+  {
+    path: 'contact',
+    loadChildren: () =>
+      import('./contact-page/contact-page.module').then(
+        (m) => m.ContactPageModule
       ),
   },
   { path: '**', component: PageNotFoundComponent },

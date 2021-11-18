@@ -4,29 +4,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-
 import { HeaderComponent } from './header/header.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
+import { FooterComponent } from './footer/footer.component';
 import { RoutingModule } from './routing/routing.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { LayoutModule } from '@angular/cdk/layout';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
-import { FooterComponent } from './footer/footer.component';
 import { MaterialModule } from './material/material.module';
-import { CheckoutPageComponent } from './checkout-page/checkout-page.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    PageNotFoundComponent,
-    FooterComponent,
-    CheckoutPageComponent,
-  ],
+  declarations: [AppComponent, HeaderComponent, FooterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

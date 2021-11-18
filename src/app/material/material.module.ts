@@ -10,7 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
-
+import { MatBadgeModule } from '@angular/material/badge';
 const MaterialComponents = [
   MatToolbarModule,
   MatSidenavModule,
@@ -21,6 +21,7 @@ const MaterialComponents = [
   MatToolbarModule,
   MatIconModule,
   MatSidenavModule,
+  MatBadgeModule,
 ];
 
 @NgModule({
