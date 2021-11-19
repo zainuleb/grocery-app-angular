@@ -8,33 +8,37 @@
               <tr class="edd_cart_header_row">
                 <th class="edd_cart_item_name">Item Name</th>
                 <th class="edd_cart_item_price">Item Price</th>
+                <th class="edd_cart_item_price">Item Quantity</th>
                 <th class="edd_cart_actions">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr
-                class="edd_cart_item"
-                id="edd_cart_item_0_25"
-                data-download-id="25"
-              >
-                <td class="edd_cart_item_name">
-                  <div class="edd_cart_item_image">
-                    <img
-                      width="25"
-                      height="25"
-                      src="images/scorilo2-70x70.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <span class="edd_checkout_cart_item_title"
-                    >Audio Item - Single License</span
-                  >
-                </td>
-                <td class="edd_cart_item_price">$11.99</td>
-                <td class="edd_cart_actions">
-                  <a class="edd_cart_remove_item_btn" href="#">Remove</a>
-                </td>
-              </tr>
+              <ng-container *ngFor="let item of cartList">
+                <tr class="edd_cart_item" id="edd_cart_item_0_25">
+                  <td>
+                    <div class="edd_cart_item_image">
+                      <img
+                        width="25"
+                        height="25"
+                        src="{{ item.item.image }}"
+                        alt="{{ item.item.title }}"
+                      />
+                    </div>
+                    <span class="edd_checkout_cart_item_title">
+                      {{ item.item.title }}
+                    </span>
+                  </td>
+                  <td class="edd_cart_item_price">${{ item.item.price }}</td>
+                  <td class="edd_cart_item_price">{{ item.quantity }}</td>
+                  <td class="edd_cart_actions">
+                    <a
+                      class="edd_cart_remove_item_btn"
+                      click="removeHandler(item.item)"
+                      >Remove</a
+                    >
+                  </td>
+                </tr>
+              </ng-container>
             </tbody>
             <tfoot>
               <tr class="edd_cart_footer_row">
@@ -57,7 +61,7 @@
                     class="edd_cart_amount"
                     data-subtotal="11.99"
                     data-total="11.99"
-                    >$11.99</span
+                    >${{ cartTotal }}</span
                   >
                 </th>
               </tr>
@@ -116,7 +120,7 @@
                 class="edd_cart_amount"
                 data-subtotal="11.99"
                 data-total="11.99"
-                >$11.99</span
+                >${{ cartTotal }}</span
               >
             </p>
             <input type="hidden" name="edd_action" value="purchase" />

@@ -26,7 +26,9 @@
           <button mat-raised-button color="primary">
             <a (click)="productDetail(item.id)"> Detail </a>
           </button>
-          <button mat-raised-button color="accent">Add to Cart</button>
+          <button mat-raised-button color="accent">
+            <a (click)="addToCart(item)">Add to Cart</a>
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
