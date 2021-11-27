@@ -7,16 +7,113 @@
         </div>
       </div>
 
-      <form method="post" id="contactform">
-        <div class="form">
-          <input type="text" name="name" placeholder="Your Name *" />
-          <input type="text" name="email" placeholder="Your E-mail Address *" />
-          <textarea
-            name="comment"
-            rows="7"
-            placeholder="Type your Message *"
-          ></textarea>
-          <input type="submit" id="submit" class="clearfix btn" value="Send" />
+      <form
+        #contactForm="ngForm"
+        (ngSubmit)="onSubmit(contactForm.value)"
+        class="contact-form"
+      >
+        <div ngModelGroup="fullName" class="contact-form-names">
+          <mat-form-field class="contact-name" appearance="outline">
+            <mat-label>First name</mat-label>
+            <input
+              matInput
+              name="firstName"
+              forbiddenName="bob"
+              [(ngModel)]="contactModel.firstName"
+              #firstName="ngModel"
+              minlength="1"
+              required
+            />
+            <div
+              *ngIf="
+                firstName.invalid && (firstName.dirty || firstName.touched)
+              "
+              class="alert"
+            >
+              <div *ngIf="firstName.errors?.['required']">
+                First Name is required.
+              </div>
+              <div *ngIf="firstName.errors?.['minlength']">
+                First Name must be at least a character long.
+              </div>
+              <div *ngIf="firstName.errors?.['forbiddenName']">
+                First Name cannot be {{ firstName }}
+              </div>
+            </div>
+          </mat-form-field>
+          <mat-form-field class="contact-name" appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input
+              matInput
+              name="lastName"
+              appForbiddenName="ebad"
+              [(ngModel)]="contactModel.lastName"
+              #lastName="ngModel"
+              minlength="1"
+              required
+            />
+            <div
+              *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+              class="alert"
+            >
+              <div *ngIf="lastName.errors?.['required']">
+                Last Name is required.
+              </div>
+              <div *ngIf="lastName.errors?.['minlength']">
+                Last Name must be at least a character long.
+              </div>
+              <div *ngIf="lastName.errors?.['forbiddenlastName']">
+                Last Name cannot be {{ lastName }}
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+        <mat-form-field class="contact-full-width" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="Ex. hamza@buraq.com"
+            name="email"
+            [(ngModel)]="contactModel.email"
+            #email="ngModel"
+            required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          />
+          <div
+            *ngIf="email.invalid && (email.dirty || email.touched)"
+            class="alert"
+          >
+            <div *ngIf="email.errors?.['required']">Email is required.</div>
+            <div *ngIf="email.errors?.['pattern']">Email not Correct</div>
+          </div>
+        </mat-form-field>
+        <mat-form-field class="contact-full-width" appearance="outline">
+          <mat-label>Message</mat-label>
+          <input
+            name="message"
+            ngModel
+            required
+            minlength="4"
+            matInput
+            #message
+            maxlength="256"
+            placeholder="Ex. I need help with..."
+          />
+          <mat-hint align="start"
+            ><strong>Don't disclose personal info</strong>
+          </mat-hint>
+          <mat-hint align="end">{{ message.value.length }} / 256</mat-hint>
+        </mat-form-field>
+
+        <div class="btn">
+          <button
+            type="submit"
+            mat-raised-button
+            color="primary"
+            [disabled]="!contactForm.form.valid"
+          >
+            Send
+          </button>
         </div>
       </form>
     </div>

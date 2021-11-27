@@ -18,7 +18,10 @@
       </div>
 
       <div fxShow="true" class="cartIconContainer">
-        <mat-icon routerLink="checkout" matBadge="5" matBadgeColor="warn"
+        <mat-icon
+          routerLink="checkout"
+          matBadge="{{ cartTotal }}"
+          matBadgeColor="warn"
           >add_shopping_cart</mat-icon
         >
         <div fxShow="true" fxHide.lt-md>

@@ -13,29 +13,7 @@ export class CartService {
   subject = new Subject();
   cartList: Cart[] = [];
 
-  cartTotal: Observable<{ total: 0 }>;
-
-  firstSubscription: Subscription;
-  subscribeTotalValue: number = 0;
-
-  ngOnInit() {
-    this.subscribeTotalValue = Observable.create((observer) => {
-      let total = 0;
-      this.cartList.forEach((item) => {
-        total += item.quantity * item.item.price;
-      });
-      observer.next({ total: total });
-    });
-  }
-
-  cartTotalSubscribe() {
-    this.firstSubscription = this.cartTotal.subscribe({
-      next: (value) => {
-        this.subscribeTotalValue = value.total;
-      },
-    });
-    console.log(this.subscribeTotalValue);
-  }
+  cartTotal: Subject<number> = new Subject<number>();
 
   addToCart(product) {
     const productExistInCart = this.cartList.find(
@@ -46,10 +24,12 @@ export class CartService {
       return;
     }
     productExistInCart.quantity += 1;
-    this.subject.next(product);
+    this.cartTotal.next(this.cartList.length);
   }
+
   removeProduct(product) {
     this.cartList = this.cartList.filter((item) => item.item.id !== product.id);
+    this.cartTotal.next(this.cartList.length);
   }
 
   getCartList() {

@@ -33,8 +33,6 @@ export class GroceryListComponent implements OnInit {
 
   addToCart(productItem) {
     this.cartActions.addToCart(productItem);
-    this.cartActions.cartTotalSubscribe();
-    console.log(this.cartActions.subscribeTotalValue);
   }
 
   ngOnInit(): void {}
