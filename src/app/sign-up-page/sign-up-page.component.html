@@ -1,0 +1,54 @@
+<div class="container">
+  <div id="login-box">
+    <div class="left">
+      <h1>Sign up</h1>
+
+      <form [formGroup]="userRegistrationForm" (ngSubmit)="onSubmit()">
+        <input
+          type="text"
+          name="username"
+          placeholder="Name"
+          id="name"
+          formControlName="userName"
+        />
+        <input
+          type="text"
+          name="email"
+          placeholder="E-mail"
+          formControlName="email"
+        />
+
+        <div formGroupName="password">
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            formControlName="firstPassword"
+          />
+          <input
+            type="password"
+            name="password2"
+            placeholder="Retype password"
+            formControlName="confirmPassword"
+          />
+        </div>
+
+        <input
+          type="submit"
+          name="signup_submit"
+          value="Sign me up"
+          [disabled]="!userRegistrationForm.valid"
+        />
+      </form>
+    </div>
+
+    <div class="right">
+      <span class="loginwith">Sign in with<br />social network</span>
+
+      <button class="social-signin facebook">Log in with facebook</button>
+      <button class="social-signin twitter">Log in with Twitter</button>
+      <button class="social-signin google">Log in with Google+</button>
+    </div>
+    <div class="or">OR</div>
+  </div>
+</div>

@@ -5,6 +5,7 @@ import { HomePageModule } from './home-page/home-page.module';
 import { GroceriesModule } from './groceries/groceries.module';
 import { CheckoutPageModule } from './checkout-page/checkout-page.module';
 import { GroceriesComponent } from './groceries/groceries.component';
+import { SignUpPageModule } from './sign-up-page/sign-up-page.module';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AppComponent } from './app.component';
@@ -17,17 +18,24 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'signup',
+    loadChildren: () =>
+      import('./sign-up-page/sign-up-page.module').then(
+        (m) => m.SignUpPageModule
+      ),
+  },
+  {
     path: 'groceries',
     loadChildren: () =>
       import('./groceries/groceries.module').then((m) => m.GroceriesModule),
   },
-  {
+  /* {
     path: 'checkout',
     loadChildren: () =>
       import('./checkout-page/checkout-page-routing.module').then(
         (m) => m.CheckoutPageRoutingModule
       ),
-  },
+  }, */
   {
     path: 'contact',
     loadChildren: () =>

@@ -18,15 +18,18 @@
       </div>
 
       <div fxShow="true" class="cartIconContainer">
+        <div fxShow="true" fxHide.lt-md>
+          <a routerLink="signup" mat-button>Sign Up</a>
+        </div>
+        <div fxShow="true" fxHide.lt-md>
+          <a routerLink="contact" mat-button>Contact Us</a>
+        </div>
         <mat-icon
           routerLink="checkout"
           matBadge="{{ cartTotal }}"
           matBadgeColor="warn"
           >add_shopping_cart</mat-icon
         >
-        <div fxShow="true" fxHide.lt-md>
-          <a routerLink="contact" mat-button>Contact Us</a>
-        </div>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
@@ -35,8 +38,10 @@
     <mat-sidenav #sidenav>
       <mat-nav-list>
         <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
-        <a routerLink="groceries" mat-button>Groceries Catalog</a>
-        <a routerLink="checkout" mat-button>Shopping List</a>
+        <div><a routerLink="groceries" mat-button>Groceries Catalog</a></div>
+        <div><a routerLink="checkout" mat-button>Shopping List</a></div>
+        <div><a routerLink="contact" mat-button>Contact Us</a></div>
+        <div><a routerLink="signup" mat-button>Sign Up</a></div>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content fxFlexFill>
