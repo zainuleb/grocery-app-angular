@@ -29,13 +29,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./groceries/groceries.module').then((m) => m.GroceriesModule),
   },
-  /* {
+  {
     path: 'checkout',
     loadChildren: () =>
       import('./checkout-page/checkout-page-routing.module').then(
         (m) => m.CheckoutPageRoutingModule
       ),
-  }, */
+  },
   {
     path: 'contact',
     loadChildren: () =>

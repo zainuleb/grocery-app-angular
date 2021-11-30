@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { CartService } from '../api/cart/cart.services';
 import { Cart } from '../api/cart/cart.interface';
 
@@ -6,8 +11,11 @@ import { Cart } from '../api/cart/cart.interface';
   selector: 'app-checkout-page',
   templateUrl: './checkout-page.component.html',
   styleUrls: ['./checkout-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckoutPageComponent implements OnInit {
+  @Input() jsonFormData: any;
+
   cartList: Cart[];
   cartTotal = 0;
 

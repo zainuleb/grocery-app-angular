@@ -3,6 +3,41 @@
   outline: none;
 }
 
+.my-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Validation CSS */
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid #42a948; /* green */
+}
+/* .ng-star-inserted {
+  margin: 1px auto;
+  font-size: 11px;
+} */
+.alert div {
+  background-color: #fed3d3;
+  color: #820000;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
 .container {
   height: 80vh;
 }
@@ -19,9 +54,9 @@ body {
 
 #login-box {
   position: relative;
-  margin: 5% auto;
-  width: 600px;
-  height: 400px;
+  margin: 3% auto;
+  width: 800px;
+  min-height: 520px;
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
@@ -32,8 +67,8 @@ body {
   top: 0;
   left: 0;
   box-sizing: border-box;
-  padding: 40px;
-  width: 300px;
+  padding: 20px 40px;
+  width: 462px;
   height: 400px;
 }
 
@@ -43,7 +78,7 @@ h1 {
   font-size: 28px;
 }
 
-input[type="text"],
+/* input[type="text"],
 input[type="password"] {
   display: block;
   box-sizing: border-box;
@@ -62,9 +97,9 @@ input[type="password"] {
 input[type="text"]:focus,
 input[type="password"]:focus {
   border-bottom: 2px solid #16a085;
-  color: #16a085;
+  color: #000000;
   transition: 0.2s ease;
-}
+} */
 
 input[type="submit"] {
   margin-top: 28px;
@@ -97,7 +132,7 @@ input[type="submit"]:active {
 .or {
   position: absolute;
   top: 180px;
-  left: 280px;
+  left: 450px;
   width: 40px;
   height: 40px;
   background: #ddd;
@@ -115,7 +150,6 @@ input[type="submit"]:active {
   padding: 40px;
   width: 300px;
   height: 400px;
-  background: url("https://goo.gl/YbktSj");
   background-size: cover;
   background-position: center;
   border-radius: 0 2px 2px 0;

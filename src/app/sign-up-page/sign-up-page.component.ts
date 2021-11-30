@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
+
+import { MustMatch } from '../api/sign-up/sign-up-validation.service';
+import { SignUp } from '../api/sign-up/sign-up.interface';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -7,18 +15,46 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./sign-up-page.component.scss'],
 })
 export class SignUpPageComponent implements OnInit {
-  ngOnInit(): void {}
+  userRegistrationForm: FormGroup;
+  submitted = false;
 
-  userRegistrationForm = new FormGroup({
-    userName: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormGroup({
-      firstPassword: new FormControl(''),
-      confirmPassword: new FormControl(''),
-    }),
-  });
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.userRegistrationForm = this.fb.group(
+      {
+        userName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required],
+      },
+      {
+        validator: MustMatch('password', 'confirmPassword'),
+      }
+    );
+  }
+
+  // convenience getter for easy access to form fields
+  get f() {
+    return this.userRegistrationForm.controls;
+  }
 
   onSubmit() {
-    console.log(this.userRegistrationForm.value);
+    this.submitted = true;
+
+    if (this.userRegistrationForm.invalid) {
+      console.log('Here');
+      return;
+    }
+
+    alert(
+      'SUCCESS!! :-)\n\n' +
+        JSON.stringify(this.userRegistrationForm.value, null, 4)
+    );
+  }
+
+  onReset() {
+    this.submitted = false;
+    this.userRegistrationForm.reset();
   }
 }
