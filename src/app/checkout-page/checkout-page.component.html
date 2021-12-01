@@ -69,68 +69,280 @@
           </table>
         </div>
       </form>
-      <div id="edd_checkout_form_wrap" class="edd_clearfix">
-        <form id="edd_purchase_form" class="edd_form" action="#" method="POST">
-          <fieldset id="edd_checkout_user_info">
-            <legend>Personal Info</legend>
-            <p id="edd-email-wrap">
-              <label class="edd-label" for="edd-email">
-                Email Address
-                <span class="edd-required-indicator">*</span></label
+
+      <!-- form header -->
+      <div class="row">
+        <div class="col">
+          <h1>Address Form</h1>
+          <hr />
+        </div>
+      </div>
+
+      <!-- main form -->
+      <div class="row">
+        <form action="" style="width: 100%" [formGroup]="userCheckoutForm">
+          <div class="col">
+            <!-- personal info -->
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="fnText">First Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Full Name"
+                    formControlName="fullName"
+                    id="fnText"
+                    placeholder="Enter first name"
+                  />
+                  <!--   <small
+                    id="fnHelp"
+                    *ngIf="fullName.errors?.required && fullName.touched"
+                    class="form-text custom-invalid-feedback"
+                    >Field is required</small
+                  >
+                  <small
+                    id="fnHelp"
+                    *ngIf="fullName.errors?.minlength && fullName.touched"
+                    class="form-text custom-invalid-feedback"
+                    >Value must contain atleast 2 characters</small
+                  > -->
+                </div>
+              </div>
+            </div>
+
+            <!-- seperator -->
+            <div class="row">
+              <div class="col">
+                <hr />
+              </div>
+            </div>
+
+            <!-- address form portion -->
+            <div class="row" formArrayName="address">
+              <div
+                class="col-12"
+                *ngFor="let group of addressArray.controls; let i = index"
+                [formGroupName]="i"
               >
-              <input
-                class="edd-input required"
-                type="email"
-                name="edd_email"
-                placeholder="Email address"
-                id="edd-email"
-                value=""
-              />
-            </p>
-            <p id="edd-first-name-wrap">
-              <label class="edd-label" for="edd-first">
-                First Name <span class="edd-required-indicator">*</span>
-              </label>
-              <input
-                class="edd-input required"
-                type="text"
-                name="edd_first"
-                placeholder="First name"
-                id="edd-first"
-                value=""
-                required=""
-              />
-            </p>
-            <p id="edd-last-name-wrap">
-              <label class="edd-label" for="edd-last"> Last Name </label>
-              <input
-                class="edd-input"
-                type="text"
-                name="edd_last"
-                id="edd-last"
-                placeholder="Last name"
-                value=""
-              />
-            </p>
-          </fieldset>
-          <fieldset id="edd_purchase_submit">
-            <p id="edd_final_total_wrap">
-              <strong>Purchase Total:</strong>
-              <span
-                class="edd_cart_amount"
-                data-subtotal="11.99"
-                data-total="11.99"
-                >${{ cartTotal }}</span
-              >
-            </p>
-            <input type="hidden" name="edd_action" value="purchase" />
-            <input type="hidden" name="edd-gateway" value="manual" />
-            <button mat-flat-button color="accent" id="edd-purchase-button">
-              Purchase
-            </button>
-          </fieldset>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-8">
+                        <h4>Address {{ i + 1 }}</h4>
+                      </div>
+                      <div class="col-4 control-buttons">
+                        <img
+                          src="/assets/icons/add.svg"
+                          alt=""
+                          (click)="addAddress()"
+                        />
+                        <img
+                          src="/assets/icons/remove.svg"
+                          alt=""
+                          width="24"
+                          height="24"
+                          (click)="removeAddress(i)"
+                        />
+                      </div>
+                    </div>
+                    <hr />
+                  </div>
+                  <div class="col-12" style="margin-bottom: 1rem">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        formControlName="primaryFlg"
+                        type="checkbox"
+                        value=""
+                        id="defaultCheck1"
+                      />
+                      <label class="form-check-label" for="defaultCheck1">
+                        Is Primary Address
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="addText">Street Address</label>
+                      <input
+                        type="text"
+                        formControlName="streetAddress"
+                        id="addText"
+                        placeholder="Enter street address"
+                      />
+                      <!-- <small
+                        *ngIf="
+                          group.controls.streetAddress.invalid &&
+                          group.controls.streetAddress.touched
+                        "
+                        class="form-text custom-invalid-feedback"
+                        >Field is required</small
+                      > -->
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="city">City</label>
+                          <input
+                            type="text"
+                            formControlName="city"
+                            id="city"
+                            placeholder="Enter city"
+                          />
+                          <!--  <small
+                            *ngIf="
+                              group.controls.city.invalid &&
+                              group.controls.city.touched
+                            "
+                            class="form-text custom-invalid-feedback"
+                            >Field is required</small
+                          > -->
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="state">State</label>
+                          <select id="inputState" formControlName="state">
+                            <option selected [ngValue]="null">Choose...</option>
+                            <option *ngFor="let item of states" [value]="item">
+                              {{ item }}
+                            </option>
+                          </select>
+                          <!--  <small
+                            *ngIf="
+                              group.controls.state.invalid &&
+                              group.controls.state.touched
+                            "
+                            class="form-text custom-invalid-feedback"
+                            >Field is required</small -->
+                          >
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="zipcode">Zip Code</label>
+                          <input
+                            type="text"
+                            formControlName="zipcode"
+                            id="zipcode"
+                            placeholder="Enter city"
+                          />
+                          <!--  <small
+                            *ngIf="
+                              group.controls.zipcode.errors?.required &&
+                              group.controls.zipcode.touched
+                            "
+                            class="form-text custom-invalid-feedback"
+                            >Field is required</small
+                          >
+                          <small
+                            *ngIf="
+                              group.controls.zipcode.errors?.pattern &&
+                              group.controls.zipcode.touched
+                            "
+                            class="form-text custom-invalid-feedback"
+                            >Value should be 5 digit number.</small
+                          > -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- seperator -->
+            <div class="row">
+              <div class="col">
+                <hr />
+              </div>
+            </div>
+
+            <!-- final action buttons -->
+            <div class="row justify-content-center">
+              <div class="col-2">
+                <button
+                  type="button"
+                  [disabled]="userCheckoutForm.invalid"
+                  (click)="submitHandler()"
+                  class="btn btn-primary"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
         </form>
       </div>
     </div>
   </div>
 </section>
+
+<!-- <div id="edd_checkout_form_wrap" class="edd_clearfix">
+  <form
+    [FormGroup]="userCheckoutFOrm"
+    id="edd_purchase_form"
+    class="edd_form"
+  >
+    <fieldset id="edd_checkout_user_info">
+      <legend>Personal Info</legend>
+      <p id="edd-email-wrap">
+        <label class="edd-label" for="edd-email">
+          Email Address
+          <span class="edd-required-indicator">*</span></label
+        >
+        <input
+          class="edd-input required"
+          type="email"
+          name="edd_email"
+          placeholder="Email address"
+        />
+      </p>
+      <p id="edd-first-name-wrap">
+        <label class="edd-label" for="edd-first">
+          First Name <span class="edd-required-indicator">*</span>
+        </label>
+        <input
+          class="edd-input required"
+          type="text"
+          name="edd_first"
+          placeholder="First name"
+          id="edd-first"
+          value=""
+          required=""
+        />
+      </p>
+      <p id="edd-last-name-wrap">
+        <label class="edd-label" for="edd-last"> Last Name </label>
+        <input
+          class="edd-input"
+          type="text"
+          name="edd_last"
+          id="edd-last"
+          placeholder="Last name"
+          value=""
+        />
+      </p>
+    </fieldset>
+    <fieldset id="edd_purchase_submit">
+      <p id="edd_final_total_wrap">
+        <strong>Purchase Total:</strong>
+        <span
+          class="edd_cart_amount"
+          data-subtotal="11.99"
+          data-total="11.99"
+          >${{ cartTotal }}</span
+        >
+      </p>
+      <input type="hidden" name="edd_action" value="purchase" />
+      <input type="hidden" name="edd-gateway" value="manual" />
+      <button mat-flat-button color="accent" id="edd-purchase-button">
+        Purchase
+      </button>
+    </fieldset>
+  </form>
+</div>
+</div> -->
