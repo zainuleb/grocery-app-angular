@@ -23,7 +23,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
             this.imageList.push({ path: item.image });
           });
       });
-    console.log(this.imageList);
   }
 
   productDetail(id: number): void {

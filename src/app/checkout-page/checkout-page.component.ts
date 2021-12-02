@@ -47,7 +47,7 @@ export class CheckoutPageComponent implements OnInit {
     this.calcCartTotal();
 
     this.userCheckoutForm = this.fb.group({
-      fullName: [],
+      fullName: [null, [Validators.required, Validators.minLength(2)]],
       address: this.fb.array([this.addAddressGroup()]),
     });
   }
@@ -66,12 +66,17 @@ export class CheckoutPageComponent implements OnInit {
   addAddress() {
     this.addressArray.push(this.addAddressGroup());
   }
+
   removeAddress(index) {
     this.addressArray.removeAt(index);
   }
 
+  get fullName() {
+    return this.userCheckoutForm.get('fullName');
+  }
+
   get addressArray() {
-    return <FormArray>this.userCheckoutForm.get('address');
+    return this.userCheckoutForm.controls['address'] as FormArray;
   }
 
   submitHandler() {
