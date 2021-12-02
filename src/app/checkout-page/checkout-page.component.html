@@ -1,317 +1,331 @@
-<section class="item content">
-  <div class="container toparea">
-    <div id="edd_checkout_wrap" class="col-md-8 col-md-offset-2">
-      <form id="edd_checkout_cart_form" method="post">
-        <div id="edd_checkout_cart_wrap">
-          <table id="edd_checkout_cart">
-            <thead>
-              <tr class="edd_cart_header_row">
-                <th class="edd_cart_item_name">Item Name</th>
-                <th class="edd_cart_item_price">Item Price</th>
-                <th class="edd_cart_item_price">Item Quantity</th>
-                <th class="edd_cart_actions">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <ng-container *ngFor="let item of cartList">
-                <tr class="edd_cart_item" id="edd_cart_item_0_25">
-                  <td>
-                    <div class="edd_cart_item_image">
-                      <img
-                        width="25"
-                        height="25"
-                        src="{{ item.item.image }}"
-                        alt="{{ item.item.title }}"
-                      />
-                    </div>
-                    <span class="edd_checkout_cart_item_title">
-                      {{ item.item.title }}
-                    </span>
-                  </td>
-                  <td class="edd_cart_item_price">${{ item.item.price }}</td>
-                  <td class="edd_cart_item_price">{{ item.quantity }}</td>
-                  <td class="edd_cart_actions">
-                    <a
-                      class="edd_cart_remove_item_btn"
-                      click="removeHandler(item.item)"
-                      >Remove</a
-                    >
-                  </td>
-                </tr>
-              </ng-container>
-            </tbody>
-            <tfoot>
-              <tr class="edd_cart_footer_row">
-                <th colspan="5">
-                  <button mat-button class="edd-save-cart-button">
-                    Save Cart
-                  </button>
-                </th>
-              </tr>
-              <tr
-                class="edd_cart_footer_row edd_cart_discount_row"
-                style="display: none"
-              >
-                <th colspan="5" class="edd_cart_discount"></th>
-              </tr>
-              <tr class="edd_cart_footer_row">
-                <th colspan="5" class="edd_cart_total">
-                  Total:
-                  <span
-                    class="edd_cart_amount"
-                    data-subtotal="11.99"
-                    data-total="11.99"
-                    >${{ cartTotal }}</span
-                  >
-                </th>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-      </form>
+<section class="item-content">
+  <div class="container">
+    <table id="edd_checkout_cart">
+      <thead>
+        <tr class="edd_cart_header_row">
+          <th>Item Name</th>
+          <th>Item Price</th>
+          <th>Item Quantity</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let item of cartList">
+          <tr>
+            <td>
+              <div>
+                <img
+                  width="25"
+                  height="25"
+                  src="{{ item.item.image }}"
+                  alt="{{ item.item.title }}"
+                />
+              </div>
+              <span>
+                {{ item.item.title }}
+              </span>
+            </td>
+            <td>${{ item.item.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>
+              <a click="removeHandler(item.item)">Remove</a>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="5">
+            <button mat-button class="edd-save-cart-button">Save Cart</button>
+          </th>
+        </tr>
+        <tr style="display: none">
+          <th colspan="5"></th>
+        </tr>
+        <tr>
+          <th colspan="5">
+            Total:
+            <span data-subtotal="11.99" data-total="11.99"
+              >${{ cartTotal }}</span
+            >
+          </th>
+        </tr>
+      </tfoot>
+    </table>
 
+    <div class="form-group">
       <!-- form header -->
-      <div class="row">
-        <div class="col">
-          <h1>Address Form</h1>
-          <hr />
-        </div>
-      </div>
-
+      <h1>Address Form</h1>
       <!-- main form -->
-      <div class="row">
-        <form action="" style="width: 100%" [formGroup]="userCheckoutForm">
-          <div class="col">
-            <!-- personal info -->
-            <div class="row">
-              <div class="col-6">
-                <div class="form-group">
-                  <label for="fnText">First Name</label>
-                  <input
-                    type="text"
-                    name="fullName"
-                    placeholder="Full Name"
-                    formControlName="fullName"
-                    id="fnText"
-                    placeholder="Enter first name"
-                    [ngClass]="{
-                      'form-control': true,
-                      'is-invalid': fullName.invalid && fullName.touched,
-                      'is-valid': fullName.valid
-                    }"
-                  />
+
+      <form [formGroup]="userCheckoutForm">
+        <mat-accordion class="example-headers-align">
+          <mat-expansion-panel
+            [expanded]="step === 0"
+            (opened)="setStep(0)"
+            hideToggle
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title> Basic Information </mat-panel-title>
+              <mat-panel-description>
+                Fill your Name and Email details
+                <mat-icon>contact_phone</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="form-field-parallel">
+              <mat-form-field appearance="fill">
+                <input
+                  matInput
+                  name="firstName"
+                  formControlName="firstName"
+                  placeholder="Enter First Name"
+                  [ngClass]="{
+                    'form-control': true,
+                    'is-invalid': firstName.invalid && firstName.touched,
+                    'is-valid': firstName.valid
+                  }"
+                />
+                <div class="invalid-container">
                   <small
-                    id="fnHelp"
-                    *ngIf="fullName.errors?.['required'] && fullName.touched"
-                    class="form-text custom-invalid-feedback"
+                    *ngIf="firstName.errors?.['required'] && firstName.touched"
                     >Field is required</small
                   >
                   <small
-                    id="fnHelp"
-                    *ngIf="fullName.errors?.['minlength'] && fullName.touched"
-                    class="form-text custom-invalid-feedback"
-                    >Value must contain atleast 2 characters</small
+                    *ngIf="firstName.errors?.['minlength'] && firstName.touched"
+                    >Atleast "2" Characters Required</small
                   >
                 </div>
-              </div>
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <input
+                  matInput
+                  name="lastName"
+                  formControlName="lastName"
+                  placeholder="Enter Last Name"
+                  [ngClass]="{
+                    'form-control': true,
+                    'is-invalid': lastName.invalid && lastName.touched,
+                    'is-valid': lastName.valid
+                  }"
+                />
+                <div class="invalid-container">
+                  <small
+                    *ngIf="lastName.errors?.['required'] && lastName.touched"
+                    >Field is required</small
+                  >
+                  <small
+                    *ngIf="lastName.errors?.['minlength'] && lastName.touched"
+                    >Atleast "2" Characters Required</small
+                  >
+                </div>
+              </mat-form-field>
             </div>
-
-            <!-- seperator -->
-            <div class="row">
-              <div class="col">
-                <hr />
+            <mat-form-field class="emailfiled" appearance="fill">
+              <input
+                matInput
+                name="email"
+                formControlName="email"
+                placeholder="Enter Your Email"
+                [ngClass]="{
+                  'form-control': true,
+                  'is-invalid': email.invalid && email.touched,
+                  'is-valid': email.valid
+                }"
+              />
+              <div class="invalid-container">
+                <small *ngIf="email.errors?.['required'] && email.touched"
+                  >Field is required</small
+                >
+                <small *ngIf="email.errors?.['email'] && email.touched"
+                  >Invalid Email Format</small
+                >
               </div>
-            </div>
+            </mat-form-field>
+          </mat-expansion-panel>
+          <mat-divider></mat-divider>
 
-            <!-- address form portion -->
-            <div class="row" formArrayName="address">
+          <mat-expansion-panel
+            [expanded]="step === 1"
+            (opened)="setStep(1)"
+            hideToggle
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title> Address Section </mat-panel-title>
+              <mat-panel-description>
+                Add Street, City and Other Detials of Your Address
+                <mat-icon>contact_mail</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div formArrayName="address">
               <div
-                class="col-12"
                 *ngFor="let group of addressArray.controls; let i = index"
                 [formGroupName]="i"
               >
-                <div class="row">
-                  <div class="col-12">
-                    <div class="row">
-                      <div class="col-8">
-                        <h4>Address {{ i + 1 }}</h4>
-                      </div>
-                      <div class="col-4 control-buttons">
-                        <img
-                          src="/assets/icons/add.svg"
-                          alt=""
-                          (click)="addAddress()"
-                        />
-                        <img
-                          src="/assets/icons/remove.svg"
-                          alt=""
-                          width="24"
-                          height="24"
-                          (click)="removeAddress(i)"
-                        />
-                      </div>
-                    </div>
-                    <hr />
+                <div class="address-heading-container">
+                  <div class="address-heading-left">
+                    <h4>Address {{ i + 1 }}</h4>
                   </div>
-                  <div class="col-12" style="margin-bottom: 1rem">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        formControlName="primaryFlg"
-                        type="checkbox"
-                        id="defaultCheck1"
-                      />
-                      <label class="form-check-label" for="defaultCheck1">
-                        Is Primary Address
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="form-group">
-                      <label for="addText">Street Address</label>
-                      <input
-                        type="text"
-                        formControlName="streetAddress"
-                        id="addText"
-                        placeholder="Enter street address"
-                        [ngClass]="{
-                          'form-control': true,
-                          'is-invalid':
-                            group.get('streetAddress').invalid &&
-                            group.get('streetAddress').touched,
-                          'is-valid': group.get('streetAddress').valid
-                        }"
-                      />
-                      <small
-                        *ngIf="
-                          group.get('streetAddress').invalid &&
-                          group.get('streetAddress').touched
-                        "
-                        class="form-text custom-invalid-feedback"
-                        >Field is required</small
-                      >
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="row">
-                      <div class="col">
-                        <div class="form-group">
-                          <label for="city">City</label>
-                          <input
-                            type="text"
-                            formControlName="city"
-                            id="city"
-                            placeholder="Enter city"
-                            [ngClass]="{
-                              'form-control': true,
-                              'is-invalid':
-                                group.get('city').invalid &&
-                                group.get('city').touched,
-                              'is-valid': group.get('city').valid
-                            }"
-                          />
 
-                          <small
-                            *ngIf="
-                              group.get('city').invalid &&
-                              group.get('city').touched
-                            "
-                            class="form-text custom-invalid-feedback"
-                            >Field is required</small
-                          >
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="form-group">
-                          <label for="state">State</label>
-                          <select
-                            id="inputState"
-                            formControlName="state"
-                            [ngClass]="{
-                              'form-control': true,
-                              'is-invalid':
-                                group.get('state').invalid &&
-                                group.get('state').touched,
-                              'is-valid': group.get('state').valid
-                            }"
-                          >
-                            <option selected [ngValue]="null">Choose...</option>
-                            <option *ngFor="let item of states" [value]="item">
-                              {{ item }}
-                            </option></select
-                          ><small
-                            *ngIf="
-                              group.get('state').invalid &&
-                              group.get('state').touched
-                            "
-                            class="form-text custom-invalid-feedback"
-                            >Field is required</small
-                          >
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="form-group">
-                          <label for="zipcode">Zip Code</label>
-                          <input
-                            type="text"
-                            formControlName="zipcode"
-                            id="zipcode"
-                            placeholder="Enter city"
-                            [ngClass]="{
-                              'form-control': true,
-                              'is-invalid':
-                                group.get('zipcode').invalid &&
-                                group.get('zipcode').touched,
-                              'is-valid': group.get('zipcode').valid
-                            }"
-                          />
-                          <small
-                            *ngIf="
-                              group.get('zipcode').errors?.['required'] &&
-                              group.get('zipcode').touched
-                            "
-                            class="form-text custom-invalid-feedback"
-                            >Field is required</small
-                          >
-                          <small
-                            *ngIf="
-                              group.get('zipcode').errors?.['pattern'] &&
-                              group.get('zipcode').touched
-                            "
-                            class="form-text custom-invalid-feedback"
-                            >Value should be 5 digit number.</small
-                          >
-                        </div>
-                      </div>
+                  <div class="address-heading-right">
+                    <div class="example-button-container">
+                      <button mat-fab color="primary" (click)="addAddress()">
+                        <mat-icon>add</mat-icon>
+                      </button>
+                    </div>
+                    <div class="example-button-container">
+                      <button mat-fab color="warn" (click)="removeAddress(i)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            <!-- seperator -->
-            <div class="row">
-              <div class="col">
-                <hr />
-              </div>
-            </div>
+                <div>
+                  <mat-checkbox
+                    class="example-margin"
+                    formControlName="primaryFlg"
+                    type="checkbox"
+                    id="defaultCheck1"
+                  >
+                    Primary Address</mat-checkbox
+                  >
+                </div>
+                <mat-form-field class="emailfiled" appearance="fill">
+                  <input
+                    matInput
+                    formControlName="streetAddress"
+                    placeholder="Enter street address"
+                    [ngClass]="{
+                      'form-control': true,
+                      'is-invalid':
+                        group.get('streetAddress').invalid &&
+                        group.get('streetAddress').touched,
+                      'is-valid': group.get('streetAddress').valid
+                    }"
+                  />
+                  <div class="invalid-container">
+                    <small
+                      *ngIf="
+                        group.get('streetAddress').invalid &&
+                        group.get('streetAddress').touched
+                      "
+                      >Field is required</small
+                    >
+                  </div>
+                </mat-form-field>
 
-            <!-- final action buttons -->
-            <div class="row justify-content-center">
-              <div class="col-2">
-                <button
-                  type="button"
-                  [disabled]="userCheckoutForm.invalid"
-                  (click)="submitHandler()"
-                  class="btn btn-primary"
-                >
-                  Submit
-                </button>
+                <mat-form-field class="emailfiled" appearance="fill">
+                  <input
+                    matInput
+                    formControlName="city"
+                    placeholder="Enter city"
+                    [ngClass]="{
+                      'form-control': true,
+                      'is-invalid':
+                        group.get('city').invalid && group.get('city').touched,
+                      'is-valid': group.get('city').valid
+                    }"
+                  />
+                  <div class="invalid-container">
+                    <small
+                      *ngIf="
+                        group.get('city').invalid && group.get('city').touched
+                      "
+                      >Field is required</small
+                    >
+                  </div>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                  <mat-label>State</mat-label>
+                  <mat-select
+                    id="inputState"
+                    formControlName="state"
+                    [ngClass]="{
+                      'form-control': true,
+                      'is-invalid':
+                        group.get('state').invalid &&
+                        group.get('state').touched,
+                      'is-valid': group.get('state').valid
+                    }"
+                  >
+                    <mat-option
+                      *ngFor="let item of states"
+                      [value]="item"
+                      placeholder="state"
+                    >
+                      {{ item }}
+                    </mat-option>
+                  </mat-select>
+                  <div class="invalid-container">
+                    <small
+                      *ngIf="
+                        group.get('state').invalid && group.get('state').touched
+                      "
+                      >Field is required</small
+                    >
+                  </div>
+                </mat-form-field>
+
+                <mat-form-field class="emailfiled" appearance="fill">
+                  <input
+                    matInput
+                    type="number"
+                    formControlName="zipcode"
+                    id="zipcode"
+                    placeholder="Enter city"
+                    [ngClass]="{
+                      'form-control': true,
+                      'is-invalid':
+                        group.get('zipcode').invalid &&
+                        group.get('zipcode').touched,
+                      'is-valid': group.get('zipcode').valid
+                    }"
+                  />
+                  <div class="invalid-container">
+                    <small
+                      *ngIf="
+                                  group.get('zipcode').errors?.['required'] &&
+                                  group.get('zipcode').touched
+                                "
+                      >Field is required</small
+                    >
+                    <small
+                      *ngIf="
+                                  group.get('zipcode').errors?.['pattern'] &&
+                                  group.get('zipcode').touched
+                                "
+                      >Value should be 5 digit number.</small
+                    >
+                  </div>
+                </mat-form-field>
               </div>
             </div>
-          </div>
-        </form>
-      </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-divider></mat-divider>
+
+        <div class="btn-container">
+          <button
+            mat-stroked-button
+            class="submit-btn"
+            [disabled]="userCheckoutForm.invalid"
+            (click)="submitHandler()"
+            style="
+              width: 20%;
+              background-color: #ff0081;
+              color: white;
+              font-size: 16px;
+              letter-spacing: 2px;
+              box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);
+              cursor: pointer;
+            "
+          >
+            Order
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </section>

@@ -1,64 +1,10 @@
-.item.content {
+.item-content {
   padding-top: 40px;
   padding-bottom: 0px;
   color: #000;
 }
-
-.edd-submit.button {
-  font-size: 20px;
-  border: 0px;
-  padding: 7px 20px;
-  text-decoration: none;
-
-  text-align: center;
-  font-weight: 400;
-  background: #fff;
-  text-transform: uppercase;
-  border-radius: 0;
-  border-bottom: 5px solid rgba(0, 0, 0, 0.1);
-  background-color: #00bba7;
-}
-.edd-submit.button,
-.edd-submit.button:visited {
-  background-color: #00bba7;
-
-  border-bottom: 5px solid rgba(0, 0, 0, 0.1);
-}
-.edd-submit.button:hover {
-  opacity: 0.8;
-}
-.rightarea-price .edd-submit.button {
-  font-size: 25px;
-  padding: 14px 25px;
-  text-decoration: none;
-
-  text-align: center;
-  font-weight: 400;
-  border-bottom: 5px solid rgba(0, 0, 0, 0.1);
-  text-transform: uppercase;
-  border-radius: 0;
-}
-.rightarea-price .edd_purchase_submit_wrapper a.edd-add-to-cart.edd-has-js,
-.rightarea-price .edd-submit.button {
-  display: block;
-}
-.edd-submit.button.active,
-.edd-submit.button:focus,
-.edd-submit.button:hover {
-  color: rgb(102, 100, 100);
-}
-#edd-purchase-button,
-.edd-submit,
-input[type="submit"].edd-submit {
-  color: #fff;
-  border: 0;
-  border-radius: 0;
-  border-bottom: 5px solid rgba(0, 0, 0, 0.1);
-  font-size: 17px;
-  font-weight: 500;
-}
 #edd_checkout_cart a.edd-cart-saving-button,
-th input[type="submit"].edd-submit {
+th {
   text-decoration: none;
   padding: 4px 10px;
   text-transform: none;
@@ -66,96 +12,11 @@ th input[type="submit"].edd-submit {
   border: 1.2px solid rgb(110, 92, 92);
   font-weight: 500;
 }
-#edd_checkout_cart input.edd-item-quantity {
+
+#edd_checkout_cart {
   padding-left: 10px;
 }
-.edd-cart-added-alert {
-  border: 2px solid green;
-  padding: 7px 10px;
-  margin-bottom: 30px;
-  float: right;
-  display: inline;
-  margin-left: 20px;
-}
-.btn-buynow {
-  font-size: 25px;
-  padding: 14px 25px;
-  text-decoration: none;
-  color: #fff;
-  text-align: center;
-  font-weight: 400;
-  border-bottom: 5px solid rgba(0, 0, 0, 0.1);
-  text-transform: uppercase;
-  border-radius: 0;
-  display: block;
-  background: #33c9b9;
-}
-.rightarea-price .edd-cart-ajax-alert {
-  display: inline;
-}
-.rightarea-price .edd-cart-added-alert {
-  border: 2px solid green;
-  padding: 16px 10px;
-  top: 2px;
-  position: absolute;
-  margin-left: 20px;
-  clear: both;
-  float: none;
-  margin-bottom: 0px;
-}
-.rightarea-price .edd_download_purchase_form {
-  margin-bottom: 0;
-}
-.rightarea-price .edd_go_to_checkout {
-  clear: both;
-  float: none;
-  margin-bottom: 0px;
-}
-.rightarea-price .edd-submit.button {
-  display: block;
-  clear: both;
-  float: none;
-  margin-bottom: 0px;
-}
-.edd_empty_cart {
-  padding: 20px;
-  display: block;
-  background-color: #fcf8e3;
-  border: #faebcc 1px solid;
-  color: #8a6d3b;
-  text-align: center;
-  margin-bottom: 200px;
-}
-.headercart {
-  font-size: 21px;
-  display: block;
-  padding-top: 45px;
-  font-weight: 300;
-  letter-spacing: 1px;
-  z-index: 2;
-  position: relative;
-}
-.headercart a {
-  z-index: 2;
-  position: relative;
-}
-.filtertagscats a {
-  border: 1px solid #ccc;
-  padding: 5px 10px;
-  margin-right: 10px;
-  margin-bottom: 13px;
-  display: inline-block;
-  text-transform: uppercase;
-  font-size: 13px !important;
-}
-table#edd_purchase_receipt td,
-table#edd_purchase_receipt th,
-table#edd_purchase_receipt_products td,
-table#edd_purchase_receipt_products th {
-  text-align: left;
-  border: 1px solid #eee;
-  padding: 10px;
-}
+
 #edd_checkout_cart {
   text-align: left;
   width: 100%;
@@ -174,68 +35,6 @@ table#edd_purchase_receipt_products th {
 
   padding: 0.5em 1.387em;
 }
-#edd_checkout_form_wrap fieldset {
-  border: 1px solid #eee;
-  padding: 1.387em;
-  margin: 0 0 21px;
-  font-size: 18px;
-}
-legend {
-  display: inline-block !important;
-  font-size: 20px;
-}
-#edd_checkout_form_wrap label {
-  display: block;
-  position: relative;
-  line-height: 100%;
-  font-size: 95%;
-  margin: 0 0 5px;
-}
-#edd_checkout_form_wrap input[type="text"],
-#edd_checkout_form_wrap input[type="email"],
-#edd_checkout_form_wrap input[type="password"],
-#edd_checkout_form_wrap input[type="tel"],
-#edd_checkout_form_wrap textarea {
-  padding: 14px 16px;
-  font-size: 14px;
-}
-#edd_checkout_form_wrap input.edd-input,
-#edd_checkout_form_wrap textarea.edd-input {
-  display: inline-block;
-  width: 100%;
-  border: 1px solid #eee;
-}
-.myaccountsection legend {
-  -webkit-padding-start: 0;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  font-weight: 700;
-  font-size: 20px;
-  display: block;
-}
-.myaccountsection #edd_login_form {
-  margin-top: 20px;
-}
-.myaccountsection #edd_login_form input,
-.myaccountsection #edd_login_form select {
-  margin-bottom: 0;
-  margin-left: 10px;
-}
-.myaccountsection #edd_login_form input[type="submit"] {
-  margin-left: 0px;
-}
-.myaccountsection input,
-.myaccountsection select {
-  margin-bottom: 20px;
-  padding: 7px 5px;
-}
-.myaccountsection input[type="submit"] {
-  background: #333;
-  padding: 7px 20px;
-  color: #fff;
-  border: 0px;
-  margin-left: 0px;
-}
 
 .edd-save-cart-button {
   background-color: rgb(32, 30, 30);
@@ -243,9 +42,82 @@ legend {
   padding: 2px 20px;
 }
 
+.form-group {
+  margin: 50px auto;
+  width: 96%;
+}
+
+.form-control {
+  float: left;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.invalid-container {
+  padding: 20px 0px 0px 0px;
+  font-size: 15px;
+  color: red;
+}
+
+.form-field-parallel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+mat-form-field.emailfiled {
+  width: 100%;
+}
+
+.address-heading-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 35px auto;
+}
+
+.address-heading-left {
+  max-width: 40%;
+  background-color: rgb(212, 212, 212);
+  padding: 1px 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h4 {
+    margin: 0px;
+    font-weight: 600;
+  }
+}
+
+.address-heading-right {
+  display: flex;
+  justify-content: space-between;
+  max-width: 40%;
+  gap: 30px;
+}
+
+.btn-container {
+  margin: 70px auto;
+}
+
 @media (min-width: 992px) {
   .container {
-    width: 970px;
+    width: 1200px;
+    margin: 0 auto;
   }
 
   .col-md-offset-2 {
@@ -259,6 +131,7 @@ legend {
 
 @media (min-width: 768px) {
   .container {
-    width: 750px;
+    width: 900px;
+    margin: 0 auto;
   }
 }

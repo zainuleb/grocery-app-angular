@@ -47,7 +47,9 @@ export class CheckoutPageComponent implements OnInit {
     this.calcCartTotal();
 
     this.userCheckoutForm = this.fb.group({
-      fullName: [null, [Validators.required, Validators.minLength(2)]],
+      firstName: [null, [Validators.required, Validators.minLength(2)]],
+      lastName: [null, [Validators.required, Validators.minLength(2)]],
+      email: [null, [Validators.required, Validators.email]],
       address: this.fb.array([this.addAddressGroup()]),
     });
   }
@@ -66,21 +68,37 @@ export class CheckoutPageComponent implements OnInit {
   addAddress() {
     this.addressArray.push(this.addAddressGroup());
   }
-
   removeAddress(index) {
     this.addressArray.removeAt(index);
   }
-
-  get fullName() {
-    return this.userCheckoutForm.get('fullName');
+  get firstName() {
+    return this.userCheckoutForm.get('firstName');
+  }
+  get lastName() {
+    return this.userCheckoutForm.get('lastName');
+  }
+  get email() {
+    return this.userCheckoutForm.get('email');
   }
 
   get addressArray() {
     return this.userCheckoutForm.controls['address'] as FormArray;
   }
-
   submitHandler() {
     console.log(this.userCheckoutForm.value);
+  }
+
+  //Pane Expansions Foo's
+  step = 0;
+
+  setStep(index: number) {
+    this.step = index;
+  }
+  nextStep() {
+    this.step++;
+  }
+  prevStep() {
+    this.step--;
   }
 
   //Service Functions
