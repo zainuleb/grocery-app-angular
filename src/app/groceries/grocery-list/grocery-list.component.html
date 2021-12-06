@@ -23,11 +23,15 @@
           {{ item.description | slice: 0:45 }}
         </mat-card-content>
         <mat-card-actions class="buttonsContainer">
-          <button mat-raised-button color="primary">
-            <a (click)="productDetail(item.id)"> Detail </a>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="productDetail(item.id)"
+          >
+            <a> Detail </a>
           </button>
-          <button mat-raised-button color="accent">
-            <a (click)="addToCart(item)">Add to Cart</a>
+          <button mat-raised-button color="accent" (click)="addToCart(item)">
+            <a>Add to Cart</a>
           </button>
         </mat-card-actions>
       </mat-card>

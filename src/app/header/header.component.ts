@@ -21,18 +21,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private cartService: CartService,
     private breakpointObserver: BreakpointObserver
-  ) {}
+  ) {
+    this.cartService.cartTotal.subscribe((response) => {
+      this.cartTotal = response;
+    });
+  }
 
   cartList: Cart[];
   cartTotal = 0;
 
   ngOnInit(): void {
     this.loadCartItems();
-
-    this.cartService.cartTotal.subscribe((response) => {
-      this.cartTotal = response;
-      console.log(response);
-    });
   }
 
   loadCartItems() {

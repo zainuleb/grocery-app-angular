@@ -12,6 +12,7 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 
 import { CartService } from '../api/cart/cart.services';
 import { Cart } from '../api/cart/cart.interface';
@@ -28,7 +29,18 @@ export class CheckoutPageComponent implements OnInit {
 
   //Declarations
   cartList: Cart[];
+
+  dataSource: MatTableDataSource<Cart> = new MatTableDataSource<Cart>([]);
+
   cartTotal = 0;
+  displayedColumns: string[] = [
+    'title',
+    'image',
+    'price',
+    'quantity',
+    'remove',
+  ];
+
   userCheckoutForm: FormGroup;
 
   states: Array<String> = [
@@ -102,16 +114,32 @@ export class CheckoutPageComponent implements OnInit {
   }
 
   //Service Functions
+
   loadCartItems() {
-    this.cartList = this.cartService.getCartList();
+    this.dataSource.data = this.cartService.getCartList();
+    this.calcCartTotal();
   }
-  removeHandler(item) {
-    this.cartService.removeProduct(item);
+
+  incrementProduct(element) {
+    this.cartService.addToCart(element.item);
+    this.calcCartTotal();
+  }
+
+  decrementProduct(element) {
+    this.cartService.removeOneProduct(element.item);
+    this.calcCartTotal();
+    this.loadCartItems();
+  }
+
+  removeHandler(element) {
+    this.cartService.removeProduct(element.item);
+    this.calcCartTotal();
+    this.loadCartItems();
   }
 
   calcCartTotal() {
     this.cartTotal = 0;
-    this.cartList.forEach((item) => {
+    this.dataSource.data.forEach((item) => {
       this.cartTotal += item.quantity * item.item.price;
     });
   }

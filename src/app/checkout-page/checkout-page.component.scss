@@ -3,43 +3,73 @@
   padding-bottom: 0px;
   color: #000;
 }
-#edd_checkout_cart a.edd-cart-saving-button,
-th {
-  text-decoration: none;
-  padding: 4px 10px;
-  text-transform: none;
-  font-size: 14px;
-  border: 1.2px solid rgb(110, 92, 92);
-  font-weight: 500;
-}
 
-#edd_checkout_cart {
-  padding-left: 10px;
-}
-
-#edd_checkout_cart {
-  text-align: left;
+table {
   width: 100%;
-  border: none;
-  margin: 0 0 21px;
-  table-layout: auto;
-}
-#edd_checkout_cart .edd_cart_header_row th {
-  background: #fafafa;
-  padding: 2em;
-}
-#edd_checkout_cart td,
-#edd_checkout_cart th {
-  text-align: left;
-  border: 1px solid #eee;
-
-  padding: 0.5em 1.387em;
 }
 
-.edd-save-cart-button {
-  background-color: rgb(32, 30, 30);
-  color: white;
-  padding: 2px 20px;
+.table-section {
+  max-width: 80%;
+  margin: 20px auto;
+}
+
+.table-section th {
+  background-color: #eee;
+  color: black;
+  font-size: 15px;
+  font-style: oblique;
+  text-align: center;
+  font-weight: 400;
+}
+
+.table-section td {
+  font-size: 13.5px;
+  text-align: center;
+  font-weight: 400;
+  padding: 2px 10px;
+}
+
+.table-section img {
+  max-width: 60px;
+  margin: 10px;
+}
+
+.table-section .quanitityContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  gap: 6px;
+}
+
+.icon-container button {
+  max-width: 26px;
+  max-height: 26px;
+}
+
+.icon-container mat-icon {
+  max-width: 15px;
+  display: contents;
+}
+
+.quantity {
+  font-weight: 200;
+  font-size: 16px;
+}
+
+.total-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px 10px;
+  strong {
+    background-color: #ff0081;
+    color: white;
+    font-size: 16px;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    letter-spacing: 2px;
+    box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);
+    padding: 10px 20px;
+    border-radius: 3.8px;
+  }
 }
 
 .form-group {
@@ -66,9 +96,22 @@ th {
 }
 
 .invalid-container {
-  padding: 20px 0px 0px 0px;
   font-size: 15px;
   color: red;
+}
+
+.form-field-container {
+  color: blue;
+
+  ::ng-deep .mat-form-field {
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+
+    .mat-form-field-underline {
+      bottom: 0.344em;
+    }
+  }
 }
 
 .form-field-parallel {
