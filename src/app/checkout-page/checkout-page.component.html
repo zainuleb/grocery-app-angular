@@ -42,7 +42,7 @@
           </td>
         </ng-container>
         <ng-container matColumnDef="remove">
-          <th mat-header-cell *matHeaderCellDef>Price</th>
+          <th mat-header-cell *matHeaderCellDef>Remove</th>
           <td mat-cell *matCellDef="let element">
             <div class="remove-container">
               <button
@@ -51,7 +51,7 @@
                 (click)="removeHandler(element)"
               >
                 <mat-icon aria-hidden="false" aria-label="Example home icon"
-                  >remove_circle_outline</mat-icon
+                  >cancel</mat-icon
                 >
               </button>
             </div>
@@ -137,33 +137,68 @@
                 </div>
               </div>
             </div>
-            <div class="form-field-container">
+
+            <div formArrayName="emails">
+              <div *ngFor="let email of emails.controls; let i = index">
+                <div [formGroupName]="i" class="emailFormContainer">
+                  <div *ngIf="i === 0">
+                    <mat-form-field class="emailfiled" appearance="fill">
+                      <input
+                        matInput
+                        name="email"
+                        formControlName="email"
+                        placeholder="Primary Address"
+                      />
+                    </mat-form-field>
+
+                    <button mat-fab color="primary" (click)="addEmail()">
+                      <mat-icon>add_circle</mat-icon>
+                    </button>
+                  </div>
+                  <div *ngIf="i !== 0">
+                    <mat-form-field class="emailfiled" appearance="fill">
+                      <input
+                        matInput
+                        name="email"
+                        formControlName="email"
+                        placeholder="Address Line: {{ i + 1 }}"
+                      />
+                    </mat-form-field>
+                    <button mat-fab color="warn" (click)="removeEmail(i)">
+                      <mat-icon>remove_circle</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--             <div class="form-field-container">
               <mat-form-field class="emailfiled" appearance="fill">
                 <input
                   matInput
                   name="email"
                   formControlName="email"
-                  placeholder="Enter Your Email"
-                  [ngClass]="{
+                  placeholder="Enter Your Email" [ngClass]="{
                     'form-control': true,
                     'is-invalid': email.invalid && email.touched,
                     'is-valid': email.valid
-                  }"
+                  }" 
                 />
               </mat-form-field>
-              <div class="invalid-container">
+
+           
+            <div class="invalid-container">
                 <small *ngIf="email.errors?.['required'] && email.touched"
                   >Field is required</small
                 >
                 <small *ngIf="email.errors?.['email'] && email.touched"
                   >Invalid Email Format</small
                 >
-              </div>
-            </div>
+              </div> 
+            </div> -->
           </mat-expansion-panel>
-          <mat-divider></mat-divider>
 
-          <mat-expansion-panel
+          <!-- <mat-expansion-panel
             [expanded]="step === 1"
             (opened)="setStep(1)"
             hideToggle
@@ -326,7 +361,7 @@
                 </div>
               </div>
             </div>
-          </mat-expansion-panel>
+          </mat-expansion-panel> -->
         </mat-accordion>
 
         <mat-divider></mat-divider>
@@ -336,7 +371,7 @@
             mat-stroked-button
             class="submit-btn"
             [disabled]="userCheckoutForm.invalid"
-            (click)="submitHandler()"
+            (click)="postOrder()"
             style="
               width: 20%;
               background-color: #ff0081;

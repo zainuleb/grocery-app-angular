@@ -15,7 +15,9 @@ import {
 import { MatTableDataSource } from '@angular/material/table';
 
 import { CartService } from '../api/cart/cart.services';
+import { OrderService } from '../api/order/order.services';
 import { Cart } from '../api/cart/cart.interface';
+import { Order, OrderItems } from '../api/order/order.interface';
 
 @Component({
   selector: 'app-checkout-page',
@@ -42,6 +44,7 @@ export class CheckoutPageComponent implements OnInit {
   ];
 
   userCheckoutForm: FormGroup;
+  email;
 
   states: Array<String> = [
     'KP',
@@ -52,7 +55,11 @@ export class CheckoutPageComponent implements OnInit {
   ];
 
   //Constructor
-  constructor(private cartService: CartService, private fb: FormBuilder) {}
+  constructor(
+    private cartService: CartService,
+    private orderService: OrderService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.loadCartItems();
@@ -61,8 +68,25 @@ export class CheckoutPageComponent implements OnInit {
     this.userCheckoutForm = this.fb.group({
       firstName: [null, [Validators.required, Validators.minLength(2)]],
       lastName: [null, [Validators.required, Validators.minLength(2)]],
-      email: [null, [Validators.required, Validators.email]],
-      address: this.fb.array([this.addAddressGroup()]),
+      emails: this.fb.array([this.newEmail()]),
+      /* email: [null, [Validators.required, Validators.email]], */
+      address: this.fb.array([]),
+    });
+  }
+
+  get emails(): FormArray {
+    return this.userCheckoutForm.controls['emails'] as FormArray;
+  }
+  addEmail() {
+    this.emails.push(this.newEmail());
+  }
+  removeEmail(i: number) {
+    this.emails.removeAt(i);
+  }
+
+  newEmail(): FormGroup {
+    return this.fb.group({
+      email: '',
     });
   }
 
@@ -88,9 +112,6 @@ export class CheckoutPageComponent implements OnInit {
   }
   get lastName() {
     return this.userCheckoutForm.get('lastName');
-  }
-  get email() {
-    return this.userCheckoutForm.get('email');
   }
 
   get addressArray() {
@@ -123,6 +144,7 @@ export class CheckoutPageComponent implements OnInit {
   incrementProduct(element) {
     this.cartService.addToCart(element.item);
     this.calcCartTotal();
+    console.log(this.dataSource.data);
   }
 
   decrementProduct(element) {
@@ -142,5 +164,33 @@ export class CheckoutPageComponent implements OnInit {
     this.dataSource.data.forEach((item) => {
       this.cartTotal += item.quantity * item.item.price;
     });
+  }
+
+  postOrder() {
+    let orderItemsCollection: OrderItems[] = [];
+    let addressCollection: string[] = [];
+
+    this.dataSource.data.map((item) => {
+      orderItemsCollection.push({
+        quantity: item.quantity,
+        productId: item.item.id,
+        price: item.item.price,
+      });
+    });
+
+    this.userCheckoutForm.value.emails.map((item) => {
+      addressCollection.push(item.email);
+    });
+
+    let order: Order = {
+      total: this.cartTotal,
+      shippingAddress: addressCollection,
+      discount: 100,
+      userId: '5f15d467f3a046427a1c26e1',
+      orderItems: orderItemsCollection,
+    };
+
+    console.log(order);
+    this.orderService.placeOrder(order);
   }
 }

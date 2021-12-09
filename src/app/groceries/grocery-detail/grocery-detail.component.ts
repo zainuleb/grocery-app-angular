@@ -3,6 +3,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { GroceryService } from 'src/app/api/groceries/services/grocery.service';
+import { CartService } from 'src/app/api/cart/cart.services';
 import { Grocery } from '../../api/groceries/interfaces/grocery.interface';
 
 @Component({
@@ -19,6 +20,7 @@ export class GroceryDetailComponent implements OnInit {
 
   constructor(
     private activatedroute: ActivatedRoute,
+    private cartActions: CartService,
     private router: Router,
     private groceryDetail: GroceryService
   ) {}
@@ -35,6 +37,10 @@ export class GroceryDetailComponent implements OnInit {
           this.gorceryItem = data;
         });
     });
+  }
+
+  addToCart(productItem) {
+    this.cartActions.addToCart(productItem);
   }
 
   ngOnDestroy() {

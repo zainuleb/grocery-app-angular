@@ -60,7 +60,13 @@
     <!-- Product Pricing -->
     <div class="product-price">
       <span>{{ gorceryItem?.price }}$</span>
-      <a href="#" class="cart-btn">Add to cart</a>
+      <button
+        mat-raised-button
+        class="cart-btn"
+        (click)="addToCart(gorceryItem)"
+      >
+        Add to cart
+      </button>
     </div>
   </div>
 </main>

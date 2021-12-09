@@ -13,13 +13,13 @@ export class GroceryService {
 
   //get all products
   getProducts(): Observable<Grocery[]> {
-    let url = `${environment.URL}/products`;
+    let url = `${environment.PRODUCTSURL}/products`;
     return this.http.get<Grocery[]>(url);
   }
 
   //get single products
   getProduct(id): Observable<Grocery> {
-    let url = `${environment.URL}/products/${id}`;
+    let url = `${environment.PRODUCTSURL}/products/${id}`;
     console.log('Url', url);
     return this.http.get<Grocery>(url);
   }

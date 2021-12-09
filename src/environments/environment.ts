@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  URL: 'https://fakestoreapi.com',
+  PRODUCTSURL: 'https://fakestoreapi.com',
+  NODEURL: 'http://localhost:3000/api/v1',
 };
 
 /*
